@@ -1,0 +1,260 @@
+<?php
+require_once "/etc/apache2/Developer/Sisobrand/wxjssdk/jssdk.php";
+$jssdk = new JSSDK("wxb66fe8e6ed2e6e02", "c6702f33202d0b98badf453a5f7a7bfa");
+$signPackage = $jssdk->GetSignPackage();
+?>
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="maximum-dpr=2" name="flexible" />
+    <meta name="apple-touch-fullscreen" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <title>火影:火影电影给您拜年啦</title>
+
+
+    <link rel="stylesheet" href="assets/stylesheets/read.css"/>
+    <!-- endinject -->
+</head>
+<body>
+
+<div class="loading content">
+    <div class="loading-img">
+        <img src="assets/images/loading-img.png" alt=""/>
+        <p class="loading-txt"><span>1</span>%</p>
+    </div>
+</div>
+
+<div class="scene content">
+    <img class="pa title01" src="assets/images/r-naruto.png"/>
+    <div class="pa title02">
+        <img class="a" src="assets/images/r-bless01.png" alt=""/>
+        <span>Wolf</span>
+        <img class="b" src="assets/images/r-bless02.png" alt=""/>
+    </div>
+    <img class="pa para" src="assets/images/r-naruto-title.png"/>
+    <img class="pa role" src="assets/images/s04-naruto.png"/>
+
+    <textarea class="pa textarea" readonly></textarea>
+    <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb66fe8e6ed2e6e02&redirect_uri=http://www.sisobrand.com/h5/naruto_newyear&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"><button class="pa btn-confirm">我也要说</button></a>
+</div>
+<audio id="audio" src="assets/images/music.mp3" loop autoplay="autoplay"></audio>
+<!-- inject:js -->
+<!-- page -->
+
+<script src="assets/scripts/flexible.js"></script>
+<script src="assets/scripts/jquery-2.1.3.min.js"></script>
+<script src="assets/scripts/socket.io.js"></script>
+<script src="assets/scripts/typed.js"></script>
+
+<!-- endinject -->
+
+<script>
+    //  preload
+    preload();
+
+    function preload () {
+        var imgPath = [
+            'assets/images/bg01.jpg',
+            'assets/images/bg02.jpg',
+            'assets/images/bg-boruto.jpg',
+            'assets/images/bg-naruto.jpg',
+            'assets/images/bg-chutian.jpg',
+            'assets/images/bg-zuozhu.jpg',
+            'assets/images/bg-dashewan.jpg',
+            'assets/images/bg-kai.jpg',
+            'assets/images/s04-boruto.png',
+            'assets/images/r-boruto-title.png',
+            'assets/images/s04-naruto.png',
+            'assets/images/r-naruto-title.png',
+            'assets/images/s04-chutian.png',
+            'assets/images/r-chutian-title.png',
+            'assets/images/s04-zuozhu.png',
+            'assets/images/r-zuozhu-title.png',
+            'assets/images/s04-dashewan.png',
+            'assets/images/r-dashewan-title.png',
+            'assets/images/s04-kai.png',
+            'assets/images/r-kai-title.png'
+        ];
+
+        var imgAmounts;
+        var loadedAmounts = 0;
+        var isLoaded = false;
+        imgAmounts = imgPath.length;
+
+        //  load first scene imgs
+        for (var i = 0; i < imgPath.length; i++) {
+            var img = new Image();
+            img.src = imgPath[i];
+
+            img.onload = function () {
+                loadedAmounts++;
+
+                /* check img load progress */
+                if (checkIsAllMainImagesLoaded() && isLoaded == false) {
+                    goCreatingProcess();
+                }
+            };
+
+            img.onerror = function (error) {
+                /* check img load progress */
+                if (checkIsAllMainImagesLoaded() && isLoaded == false) {
+                    goCreatingProcess();
+                }
+            };
+        }
+
+        //  go main
+        function goCreatingProcess () {
+            var socket = io.connect('http://120.26.48.94:1247');
+
+            socket.emit('getBlessText', getURLParameter('blessTxtID'));
+            socket.on('returnBlessTxt', function (result) {
+                var result = result.result;
+                console.dir(result);
+                chooseRole(result.index, result.name, result.text);
+
+                $('.loading').hide();
+                $('.scene').show();
+
+                setTimeout(function () {
+                    $('.role').addClass('active');
+                }, 1400);
+            });
+
+            //  first time play BGM
+            $('#audio')[0].play();
+            var initSound = function () {
+                //  delay play
+                $('#audio')[0].play();
+
+                document.removeEventListener('touchstart', initSound, false);
+            };
+            document.addEventListener('touchstart', initSound, false);
+        }
+
+        function checkIsAllMainImagesLoaded () {
+            if (isLoaded == false) {
+                var loadedRate = 0.98;
+                $('.loading-txt span').text(parseInt(loadedAmounts / imgAmounts * 100));
+                return loadedAmounts / imgAmounts >= loadedRate;
+            }
+        }
+    }
+
+    function chooseRole (index, name, bless) {
+        var roleList = [
+            'naruto',
+            'chutian',
+            'boruto',
+            'zuozhu',
+            'dashewan',
+            'kai'
+        ];
+
+        var roleListChinese = [
+            '鸣人',
+            '雏田',
+            '博人',
+            '佐助',
+            '大蛇丸',
+            '凯'
+        ];
+
+        $('title').text(roleListChinese[index] + ':火影电影给您拜年啦');
+        $('.title01').prop('src', '').prop('src', 'assets/images/r-' + roleList[index] + '.png');
+        $('.para').prop('src', '').prop('src', 'assets/images/r-' + roleList[index] + '-title.png');
+        $('.title02 span').text(name);
+        $('.textarea').typed({
+            strings: [bless],
+            typeSpeed: 50,
+            startDelay: 1200,
+            callback: function () {
+                setTimeout(function () {
+                    $('.btn-confirm ').addClass('animated infinite flash');
+                }, (bless.length-2)*50);
+            }
+        });
+
+        //  set para
+        $('.role').prop('src', '').prop('src', 'assets/images/s04-' + roleList[index] + '.png');
+
+        //  set background
+        $('.content').css({'background-image': 'url("assets/images/bg-' + roleList[index] + '.jpg")'});
+
+        //  update share info
+        wx.onMenuShareTimeline({
+            title: roleListChinese[index] + ':火影电影给您拜年啦', // 分享标题
+            link: window.location.href, // 分享链接
+            imgUrl: 'http://www.sisobrand.com/h5/naruto_newyear/assets/images/share-img.jpg', // 分享图标
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+
+        // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
+        wx.onMenuShareAppMessage({
+            title: roleListChinese[index] + ':火影电影给您拜年啦', // 分享标题
+            desc: '', // 分享描述
+            link: window.location.href, // 分享链接
+            imgUrl: 'http://www.sisobrand.com/h5/naruto_newyear/assets/images/share-img.jpg', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+    }
+
+    function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+    }
+</script>
+
+<!-- wechat share-->
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: '<?php echo $signPackage["appId"];?>',
+        timestamp: '<?php echo $signPackage["timestamp"];?>',
+        nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+        signature: '<?php echo $signPackage["signature"];?>',
+        jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline']
+    });
+
+    /** initia wechat config as default */
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+    wx.ready(function(){
+        // 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+        wx.onMenuShareTimeline({
+            title: '火影电影给您拜年啦', // 分享标题
+            link: window.location.href, // 分享链接
+            imgUrl: 'http://www.sisobrand.com/h5/naruto_newyear/assets/images/share-img.jpg', // 分享图标
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+
+        // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
+        wx.onMenuShareAppMessage({
+            title: '火影电影给您拜年啦', // 分享标题
+            desc: '', // 分享描述
+            link: window.location.href, // 分享链接
+            imgUrl: 'http://www.sisobrand.com/h5/naruto_newyear/assets/images/share-img.jpg', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+            },
+            cancel: function () {
+            }
+        });
+    });
+</script>
+</body>
+</html>

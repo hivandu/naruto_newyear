@@ -1,0 +1,151 @@
+<?php
+require_once "/etc/apache2/Developer/Sisobrand/wxjssdk/jssdk.php";
+$jssdk = new JSSDK("wxb66fe8e6ed2e6e02", "c6702f33202d0b98badf453a5f7a7bfa");
+$signPackage = $jssdk->GetSignPackage();
+?>
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="maximum-dpr=2" name="flexible" />
+    <meta name="apple-touch-fullscreen" content="no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <title>火影电影给您拜年啦</title>
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="assets/stylesheets/swiper.min.css"/>
+    <link rel="stylesheet" href="assets/stylesheets/main.css"/>
+    <!-- endinject -->
+</head>
+<body>
+<!-- the class "content" is used for flexible plugin -->
+<div class="loading content">
+    <div class="loading-img">
+        <img src="assets/images/loading-img.png" alt=""/>
+        <p class="loading-txt"><span>1</span>%</p>
+    </div>
+</div>
+
+<div class="share-tips"></div>
+
+<div id="iSlider-wrapper" class="arrow"></div>
+<div id="iSlider-arrow" class="arrow"></div>
+
+<div class="swiper-container content" style="display: none;">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide scene scene01">
+            <img class="pa mask" lazy-src="assets/images/s01-mask.png" alt=""/>
+            <img class="pa title" lazy-src="assets/images/s01-title.png" alt=""/>
+            <img class="pa penqi" lazy-src="assets/images/s01-penqi.png" alt=""/>
+
+            <img class="pa role kai" lazy-src="assets/images/s01-kai.png" alt=""/>
+            <img class="pa role dashewan" lazy-src="assets/images/s01-dashewan.png" alt=""/>
+            <img class="pa role shala" lazy-src="assets/images/s01-shala.png" alt=""/>
+            <img class="pa role chutian" lazy-src="assets/images/s01-chutian.png" alt=""/>
+            <img class="pa role zuozhu" lazy-src="assets/images/s01-zuozhu.png" alt=""/>
+            <img class="pa role naruto" lazy-src="assets/images/s01-naruto.png" alt=""/>
+            <img class="pa role boruto" lazy-src="assets/images/s01-boruto.png" alt=""/>
+
+            <img class="pa bless boruto-bless" lazy-src="assets/images/s01-boruto-bless.png" alt=""/>
+            <img class="pa bless naruto-bless" lazy-src="assets/images/s01-naruto-bless.png" alt=""/>
+            <img class="pa bless zuozhu-bless" lazy-src="assets/images/s01-zuozhu-bless.png" alt=""/>
+            <img class="pa bless chutian-bless" lazy-src="assets/images/s01-chutian-bless.png" alt=""/>
+            <img class="pa bless shala-bless" lazy-src="assets/images/s01-shala-bless.png" alt=""/>
+            <img class="pa bless dashewan-bless" lazy-src="assets/images/s01-dashewan-bless.png" alt=""/>
+            <img class="pa bless kai-bless" lazy-src="assets/images/s01-kai-bless.png" alt=""/>
+        </div>
+
+        <div class="swiper-slide scene scene02">
+            <img class="pa title01" lazy-src="assets/images/s02-title01.png" alt=""/>
+            <img class="pa title02" lazy-src="assets/images/s02-title02.png" alt=""/>
+
+            <div class="role-wrap">
+                <img class="pa role naruto" lazy-src="assets/images/s02-role01.png" alt=""/>
+                <img class="pa role chutian" lazy-src="assets/images/s02-role02.png" alt=""/>
+                <img class="pa role boruto" lazy-src="assets/images/s02-role03.png" alt=""/>
+                <img class="pa role zuozhu" lazy-src="assets/images/s02-role04.png" alt=""/>
+                <img class="pa role dashewan" lazy-src="assets/images/s02-role05.png" alt=""/>
+                <img class="pa role kai" lazy-src="assets/images/s02-role06.png" alt=""/>
+            </div>
+
+            <img class="pa dot01" lazy-src="assets/images/s02-dot01.png" alt=""/>
+            <img class="pa dot02" lazy-src="assets/images/s02-dot02.png" alt=""/>
+
+            <div class="pa btn-random">
+                <img lazy-src="assets/images/s02-random.png" alt=""/>
+            </div>
+        </div>
+
+        <div class="swiper-slide scene scene03">
+            <div class="pa part01">
+                <img class="picture" lazy-src="assets/images/s03-boruto01.png" alt=""/>
+                <img class="pa para" lazy-src="assets/images/s03-boruto-text01.png" alt=""/>
+            </div>
+            <div class="pa part02">
+                <img class="picture" lazy-src="assets/images/s03-boruto02.png" alt=""/>
+                <img class="pa para" lazy-src="assets/images/s03-boruto-text02.png" alt=""/>
+            </div>
+            <img class="pa mask" lazy-src="assets/images/s03-mask.png" alt=""/>
+        </div>
+
+        <div class="swiper-slide scene scene04">
+            <img class="pa title" lazy-src="assets/images/s04-boruto-title.png" alt=""/>
+            <img class="pa role" lazy-src="assets/images/s04-boruto.png" alt=""/>
+
+            <textarea class="pa textarea" placeholder="#你想要火影忍者替你和你朋友说点什么吗#"></textarea>
+            <button class="pa btn-confirm">确认</button>
+        </div>
+
+        <div class="swiper-slide scene scene05">
+            <img class="pa mask" lazy-src="assets/images/s05-mask.png" alt=""/>
+
+            <img class="pa title01" lazy-src="assets/images/s05-title01.png" alt=""/>
+            <img class="pa title02" lazy-src="assets/images/s05-title02.png" alt=""/>
+            <img class="pa title03" lazy-src="assets/images/s05-title03.png" alt=""/>
+
+            <img class="pa role shala" lazy-src="assets/images/s05-shala.png" alt=""/>
+            <img class="pa role jianyue" lazy-src="assets/images/s05-jianyue.png" alt=""/>
+            <img class="pa role boruto" lazy-src="assets/images/s05-boruto.png" alt=""/>
+
+            <img class="pa btn-share" lazy-src="assets/images/s05-btn.png" alt=""/>
+        </div>
+    </div>
+</div>
+
+<audio id="audio" src="assets/images/music.mp3" loop autoplay="autoplay"></audio>
+<!-- inject:js -->
+<!-- page -->
+
+<script src="assets/scripts/flexible.js"></script>
+<script src="assets/scripts/jquery-2.1.3.min.js"></script>
+<script src="assets/scripts/socket.io.js"></script>
+<script src="assets/scripts/swiper.js"></script>
+<script src="assets/scripts/main.js"></script>
+
+<!-- endinject -->
+
+<!-- wechat share-->
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: '<?php echo $signPackage["appId"];?>',
+        timestamp: '<?php echo $signPackage["timestamp"];?>',
+        nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+        signature: '<?php echo $signPackage["signature"];?>',
+        jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline']
+    });
+
+    //  get user info
+    var userCode = "<?php echo $_GET['code'];?>";
+    console.log(userCode);
+    var userInfo = $.getJSON('http://120.26.48.94:1248/userinfo?code=' + userCode + '&callback=?', function (result) {
+        window.userName = result.nickname;
+        console.log(result);
+    });
+</script>
+
+</body>
+</html>

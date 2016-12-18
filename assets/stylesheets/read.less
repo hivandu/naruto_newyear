@@ -1,0 +1,227 @@
+@import "animate";
+/*======================================================================
+      Global
+  ======================================================================*/
+* {
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+html {
+  height: 100%;
+  font-family: "microsoft yahei", Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0  auto;
+  background: #fe318e;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+p, a, button, span {
+  -webkit-font-smoothing: antialiased;
+}
+
+input {
+  outline: none;
+}
+
+.pa {
+  position: absolute;
+}
+
+/* psd width `divided` 10 */
+@page-base-rem : 75; /* 750/10=75 */
+
+.calWidth (@value) {
+  width: @value*1rem / @page-base-rem;
+}
+
+.calHeight (@value) {
+  height: @value*1rem / @page-base-rem;
+}
+
+.calTop (@value) {
+  top: @value*1rem / @page-base-rem;
+}
+
+.calBottom (@value) {
+  bottom: @value*1rem / @page-base-rem;
+}
+
+.calLeft (@value) {
+  left: @value*1rem / @page-base-rem;
+}
+
+.calRight (@value) {
+  right: @value*1rem / @page-base-rem;
+}
+
+.content {
+  position: relative;
+  display: block;
+  min-width: 10rem;
+  margin: 0 auto;
+  max-width: 1080px;
+  height: 100%;
+
+  background-repeat: repeat-y;
+  background-size: 100%;
+}
+
+/* loading */
+.loading {
+  height: 100%;
+  background: url("../images/bg01.jpg") repeat-y;
+  background-size: 100%;
+  display: table;
+}
+
+.loading-img {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+
+  img {
+    animation: loadingRotate .8s infinite linear;
+  }
+}
+
+.loading-txt {
+  font-size: .4rem;
+  color: #fff;
+}
+
+@keyframes loadingRotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.scene {
+  display: none;
+}
+
+.para {
+  .calWidth(750);
+  top: 0;
+  left: 0;
+}
+
+.title01 {
+  .calWidth(750);
+  top: 0;
+  left: 0;
+
+  .animated();
+  .fadeInLeft();
+}
+
+.title02 {
+  .calTop(90);
+  .calLeft(40);
+  font-size: .5rem;
+  color: #fff;
+
+  .animated();
+  .fadeInRight();
+
+  * {
+    vertical-align: middle;
+  }
+
+  .a {
+    .calWidth(264);
+  }
+
+  .b {
+    .calWidth(291);
+  }
+}
+
+.role {
+  width: 9.6rem;
+  left: .2rem;
+  bottom: 0;
+  .animated();
+  .fadeInLeftSmall();
+}
+
+.role.active {
+  animation: roleUp 3s infinite!important;
+}
+
+.textarea {
+  .calWidth(679);
+  .calHeight(281);
+  .calLeft(33);
+  .calBottom(144);
+  background: url("../images/s04-txt.png") no-repeat;
+  background-size: 100% 100%;
+  border: none;
+  font-size: 32/75*1rem;
+  color: #333;
+  padding: 30/75*1rem;
+  box-sizing: border-box;
+}
+
+.typed-cursor{
+  opacity: 1;
+  -webkit-animation: blink 0.7s infinite;
+  -moz-animation: blink 0.7s infinite;
+  animation: blink 0.7s infinite;
+}
+@keyframes blink{
+  0% { opacity:1; }
+  50% { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+  0% { opacity:1; }
+  50% { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes blink{
+  0% { opacity:1; }
+  50% { opacity:0; }
+  100% { opacity:1; }
+}
+
+.btn-confirm {
+  overflow: hidden;
+  .calWidth(331);
+  .calHeight(103);
+  .calLeft(210);
+  .calBottom(40);
+  background: url("../images/btn-say.png") no-repeat;
+  background-size: 100% 100%;
+  border: none;
+  text-indent: -20rem;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes roleUp {
+  0% {
+    bottom: 0;
+  }
+  50% {
+    bottom: 15px;
+  }
+  100% {
+    bottom: 0;
+  }
+}
